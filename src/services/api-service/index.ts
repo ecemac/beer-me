@@ -11,7 +11,7 @@ export const RandomBeerService = {
     return client
       .get("/random")
       .then((res) => {
-        return res.data;
+        return res.data[0];
       })
       .catch((e) => {
         console.log(e.request);

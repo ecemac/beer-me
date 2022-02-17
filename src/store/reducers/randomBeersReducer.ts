@@ -11,7 +11,7 @@ import {
 import { IBeerResponse } from "../../types";
 
 interface IInitialState {
-  data: IBeerResponse | IBeerResponse[] | null;
+  data: IBeerResponse | null;
   type: string;
   loading: boolean;
   error: boolean;
@@ -35,7 +35,7 @@ const randomBeersReducer = (
       return {
         ...state,
         data: action.payload,
-        type: "alcoholic",
+        type: "Alcoholic",
         loading: false,
       };
     case RANDOM_BEER_ERROR:
@@ -43,10 +43,12 @@ const randomBeersReducer = (
     case RANDOM_NA_BEER_LOADING:
       return { ...state, loading: true };
     case RANDOM_NA_BEER_SUCCESS:
+      let randomBeer =
+        action.payload[Math.floor(Math.random() * action.payload.length)];
       return {
         ...state,
-        data: action.payload,
-        type: "nonalcoholic",
+        data: randomBeer,
+        type: "Non-alcoholic",
         loading: false,
       };
     case RANDOM_NA_BEER_ERROR:
