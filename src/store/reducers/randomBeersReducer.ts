@@ -30,7 +30,7 @@ const randomBeersReducer = (
 ): IInitialState => {
   switch (action.type) {
     case RANDOM_BEER_LOADING:
-      return { ...state, loading: true };
+      return { ...state, data: null, loading: true };
     case RANDOM_BEER_SUCCESS:
       return {
         ...state,
@@ -41,7 +41,7 @@ const randomBeersReducer = (
     case RANDOM_BEER_ERROR:
       return { ...state, loading: false, error: true };
     case RANDOM_NA_BEER_LOADING:
-      return { ...state, loading: true };
+      return { ...state, data: null, loading: true };
     case RANDOM_NA_BEER_SUCCESS:
       let randomBeer =
         action.payload[Math.floor(Math.random() * action.payload.length)];

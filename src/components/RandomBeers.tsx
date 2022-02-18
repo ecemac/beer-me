@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../store/hooks";
 import { getRandomBeersAction, getRandomNABeersAction } from "../store/actions";
@@ -13,11 +13,11 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Error } from "./Error";
 import { styled } from "@mui/material/styles";
 
 const CustomCard = styled(Card)(({ theme }) => ({
-  width: "100%",
-  padding: 2,
+  padding: 10,
   display: "flex",
   [theme.breakpoints.up("md")]: {
     flexDirection: "row",
@@ -27,6 +27,7 @@ const CustomCard = styled(Card)(({ theme }) => ({
   },
   justifyContent: "center",
   alignItems: "center",
+  marginBottom: 20,
 }));
 
 const CustomCardContent = styled(CardContent)(({ theme }) => ({
@@ -68,12 +69,14 @@ export const RandomBeers = () => {
 
   useEffect(() => {
     getRandomBeer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (data && (!data.name || !data.description)) {
       type === "Alcoholic" ? getRandomBeer() : getRandomNABeer();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
@@ -86,7 +89,10 @@ export const RandomBeers = () => {
               <CardMedia
                 component="img"
                 sx={customStyles.image}
-                image={data.image_url}
+                image={
+                  data.image_url ??
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png"
+                }
                 alt={data.name}
               />
             </Box>
@@ -95,7 +101,7 @@ export const RandomBeers = () => {
               <Typography
                 variant="body2"
                 color="text.primary"
-                textAlign="center"
+                textAlign="justify"
                 mb={2}
               >
                 Type: {type}
@@ -103,7 +109,7 @@ export const RandomBeers = () => {
               <Typography
                 variant="body2"
                 color="text.primary"
-                textAlign="center"
+                textAlign="justify"
                 mb={2}
               >
                 {data.description} First brewed in {data.first_brewed}
@@ -111,7 +117,7 @@ export const RandomBeers = () => {
               <Typography
                 variant="body2"
                 color="text.secondary"
-                textAlign="center"
+                textAlign="justify"
                 mb={2}
               >
                 Brewer Tips: {data.brewers_tips}
@@ -119,7 +125,7 @@ export const RandomBeers = () => {
               <Typography
                 variant="body2"
                 color="text.secondary"
-                textAlign="center"
+                textAlign="justify"
               >
                 Food Pairing:{" "}
                 {data.food_pairing?.map((f) => (
@@ -141,6 +147,7 @@ export const RandomBeers = () => {
         )}
         {loading && <CircularProgress />}
       </CustomCard>
+      {error && <Error />}
     </Grid>
   );
 };

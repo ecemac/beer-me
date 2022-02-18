@@ -28,7 +28,7 @@ const searchBeersReducer = (
 ): IInitialState => {
   switch (action.type) {
     case SEARCH_BEER_NAME_LOADING:
-      return { ...state, loading: true };
+      return { ...state, data: null, loading: true };
     case SEARCH_BEER_NAME_SUCCESS:
       return {
         ...state,
@@ -44,6 +44,7 @@ const searchBeersReducer = (
     case SEARCH_BEER_DATE_LOADING:
       return {
         ...state,
+        data: null,
         loading: true,
       };
     case SEARCH_BEER_DATE_SUCCESS:
