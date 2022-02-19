@@ -32,6 +32,17 @@ export const RandomBeerService = {
         console.log(e.request);
       });
   },
+
+  getBeerByIdRequest: async (id: number): Promise<IBeerResponse> => {
+    return client
+      .get(`/${id}`)
+      .then((res) => {
+        return res.data[0];
+      })
+      .catch((e) => {
+        console.log(e.request);
+      });
+  },
 };
 
 export const SearchBeerService = {

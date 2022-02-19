@@ -5,6 +5,9 @@ import {
   RANDOM_NA_BEER_LOADING,
   RANDOM_NA_BEER_SUCCESS,
   RANDOM_NA_BEER_ERROR,
+  GET_BEER_BY_ID_LOADING,
+  GET_BEER_BY_ID_SUCCESS,
+  GET_BEER_BY_ID_ERROR,
   RandomBeerDispatchTypes,
 } from "../types";
 
@@ -52,6 +55,17 @@ const randomBeersReducer = (
         loading: false,
       };
     case RANDOM_NA_BEER_ERROR:
+      return { ...state, loading: false, error: true };
+    case GET_BEER_BY_ID_LOADING:
+      return { ...state, data: null, loading: true };
+    case GET_BEER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        type: "",
+        loading: false,
+      };
+    case GET_BEER_BY_ID_ERROR:
       return { ...state, loading: false, error: true };
     default:
       return state;

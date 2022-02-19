@@ -13,7 +13,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Error } from "./Error";
+import { Error } from "./helpers/Error";
 import { styled } from "@mui/material/styles";
 
 const CustomCard = styled(Card)(({ theme }) => ({
@@ -74,18 +74,22 @@ export const RandomBeers = () => {
 
   useEffect(() => {
     if (data && (!data.name || !data.description)) {
-      type === "Alcoholic" ? getRandomBeer() : getRandomNABeer();
+      type === "Alcoholic" || type === "" ? getRandomBeer() : getRandomNABeer();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
     <Grid item xs={12}>
-      <CustomCard raised>
+      <CustomCard raised datatest-id="random-beer-card">
         {!loading && data && data?.name && data?.description && (
           <>
             <Box sx={customStyles.items}>
-              <CardHeader title={data.name} subheader={data.tagline} />
+              <CardHeader
+                title={data.name}
+                subheader={data.tagline}
+                data-testid="random-beer-title"
+              />
               <CardMedia
                 component="img"
                 sx={customStyles.image}
@@ -94,19 +98,24 @@ export const RandomBeers = () => {
                   "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png"
                 }
                 alt={data.name}
+                data-testid="random-beer-img"
               />
             </Box>
 
             <CustomCardContent>
+              {type && (
+                <Typography
+                  variant="body2"
+                  color="text.primary"
+                  textAlign="justify"
+                  mb={2}
+                >
+                  Type: {type}
+                </Typography>
+              )}
+
               <Typography
-                variant="body2"
-                color="text.primary"
-                textAlign="justify"
-                mb={2}
-              >
-                Type: {type}
-              </Typography>
-              <Typography
+                data-testid="random-beer-description"
                 variant="body2"
                 color="text.primary"
                 textAlign="justify"
@@ -135,10 +144,18 @@ export const RandomBeers = () => {
             </CustomCardContent>
             <CardActions sx={customStyles.items}>
               <Stack spacing={4}>
-                <Button variant="outlined" onClick={getRandomBeer}>
+                <Button
+                  variant="outlined"
+                  onClick={getRandomBeer}
+                  datatest-id="random-beer-button"
+                >
                   Random Beer
                 </Button>
-                <Button variant="outlined" onClick={getRandomNABeer}>
+                <Button
+                  variant="outlined"
+                  onClick={getRandomNABeer}
+                  datatest-id="random-na-beer-button"
+                >
                   Random Non-Alcoholic Beer
                 </Button>
               </Stack>

@@ -5,9 +5,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { RandomBeers } from "./components/RandomBeers";
 import { SearchBeers } from "./components/SearchBeers";
-import { Emoji } from "./components/Emojis";
+import { Emoji } from "./components/helpers/Emojis";
 
-const store = generateStore();
+export const store = generateStore();
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

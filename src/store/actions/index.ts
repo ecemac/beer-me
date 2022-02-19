@@ -13,6 +13,9 @@ import {
   SEARCH_BEER_DATE_ERROR,
   RandomBeerDispatchTypes,
   SearchBeerDispatchTypes,
+  GET_BEER_BY_ID_LOADING,
+  GET_BEER_BY_ID_SUCCESS,
+  GET_BEER_BY_ID_ERROR,
 } from "../types";
 
 import { IBeerResponse } from "../../types";
@@ -60,6 +63,26 @@ export const getRandomNABeersAction =
     } catch (e) {
       dispatch({
         type: RANDOM_NA_BEER_ERROR,
+      });
+    }
+  };
+
+export const getBeerByIdAction =
+  (id: number) => async (dispatch: Dispatch<RandomBeerDispatchTypes>) => {
+    try {
+      dispatch({
+        type: GET_BEER_BY_ID_LOADING,
+      });
+
+      const res: IBeerResponse = await RandomBeerService.getBeerByIdRequest(id);
+
+      dispatch({
+        type: GET_BEER_BY_ID_SUCCESS,
+        payload: res,
+      });
+    } catch (e) {
+      dispatch({
+        type: GET_BEER_BY_ID_ERROR,
       });
     }
   };

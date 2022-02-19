@@ -1,3 +1,7 @@
+# Additional Implementations
+
+In addition to React.js, I used TypeScript and Redux in this project. These are the techs I'm trying to improve and I try to use them whenever possible :) Also I added a functionality for the search results, if you click the "Tell Me More" button, it scrolls up to the random beers card to show the search result in more detail. Hope you enjoy it!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,9 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { getBeerByIdAction } from "../store/actions";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { IBeerResponse } from "../types";
@@ -28,7 +32,7 @@ const CustomBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   [theme.breakpoints.up("md")]: {
-    width: "40%",
+    width: "30%",
   },
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
@@ -37,9 +41,17 @@ const CustomBox = styled(Box)(({ theme }) => ({
 }));
 
 const CustomCardContent = styled(CardContent)(({ theme }) => ({
-  maxWidth: "60%",
+  [theme.breakpoints.up("md")]: {
+    width: "50%",
+  },
   [theme.breakpoints.down("md")]: {
     width: "100%",
+  },
+}));
+
+const CustomCardActions = styled(CardActions)(({ theme }) => ({
+  [theme.breakpoints.up("md")]: {
+    width: "20%",
   },
 }));
 
@@ -59,10 +71,24 @@ const customStyles = {
 export const SearchResults: React.FC<{ data: IBeerResponse[] }> = ({
   data,
 }) => {
+  const dispatch = useDispatch();
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleOnClick = (id: number) => {
+    dispatch(getBeerByIdAction(id));
+    scrollToTop();
+  };
+
   return (
     <>
       {data.map((d) => (
-        <CustomCard key={d.id} raised>
+        <CustomCard key={d.id} raised onClick={scrollToTop}>
           <CustomBox>
             <CardMedia
               component="img"
@@ -81,6 +107,11 @@ export const SearchResults: React.FC<{ data: IBeerResponse[] }> = ({
               {d.description}
             </CustomTypography>
           </CustomCardContent>
+          <CustomCardActions>
+            <Button variant="outlined" onClick={() => handleOnClick(d.id)}>
+              Tell Me More
+            </Button>
+          </CustomCardActions>
         </CustomCard>
       ))}
     </>

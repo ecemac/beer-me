@@ -18,10 +18,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Alert from "@mui/material/Alert";
 import { SearchResults } from "./SearchResults";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Error } from "./Error";
+import { Error } from "./helpers/Error";
 import { styled } from "@mui/material/styles";
 
-const VALID_CHARACTERS_REGEX = /^[\ba-z0-9\-\s]*$/;
+export const VALID_CHARACTERS_REGEX = /^[\ba-z0-9\-\s]*$/;
 
 const CustomContainerBox = styled(Box)(() => ({
   width: "100%",
@@ -84,6 +84,7 @@ export const SearchBeers = () => {
           <CustomFormControl sx={{ m: 2 }} variant="outlined">
             <TextField
               id="outlined-adornment-password"
+              datatest-id="search-beer-input"
               value={keyword}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleOnChange(event)
@@ -117,11 +118,13 @@ export const SearchBeers = () => {
               }
             >
               <FormControlLabel
+                datatest-id="search-by-name"
                 value="name"
                 control={<Radio />}
                 label="Search by name"
               />
               <FormControlLabel
+                datatest-id="search-by-date"
                 value="date"
                 control={<Radio />}
                 label="Search brewed before"

@@ -8,6 +8,10 @@ export const RANDOM_NA_BEER_LOADING = "RANDOM_NA_BEER_LOADING";
 export const RANDOM_NA_BEER_SUCCESS = "RANDOM_NA_BEER_SUCCESS";
 export const RANDOM_NA_BEER_ERROR = "RANDOM_NA_BEER_ERROR";
 
+export const GET_BEER_BY_ID_LOADING = "GET_BEER_BY_ID_LOADING";
+export const GET_BEER_BY_ID_SUCCESS = "GET_BEER_BY_ID_SUCCESS";
+export const GET_BEER_BY_ID_ERROR = "GET_BEER_BY_ID_ERROR";
+
 export const SEARCH_BEER_NAME_LOADING = "SEARCH_BEER_NAME_LOADING";
 export const SEARCH_BEER_NAME_SUCCESS = "SEARCH_BEER_NAME_SUCCESS";
 export const SEARCH_BEER_NAME_ERROR = "SEARCH_BEER_NAME_ERROR";
@@ -42,6 +46,19 @@ export interface RandomNABeerError {
   type: typeof RANDOM_NA_BEER_ERROR;
 }
 
+export interface GetBeerByIdLoading {
+  type: typeof GET_BEER_BY_ID_LOADING;
+}
+
+export interface GetBeerByIdSuccess {
+  type: typeof GET_BEER_BY_ID_SUCCESS;
+  payload: IBeerResponse;
+}
+
+export interface GetBeerByIdError {
+  type: typeof GET_BEER_BY_ID_ERROR;
+}
+
 export interface SearchBeerNameLoading {
   type: typeof SEARCH_BEER_NAME_LOADING;
 }
@@ -74,7 +91,10 @@ export type RandomBeerDispatchTypes =
   | RandomBeerError
   | RandomNABeerLoading
   | RandomNABeerSuccess
-  | RandomNABeerError;
+  | RandomNABeerError
+  | GetBeerByIdLoading
+  | GetBeerByIdSuccess
+  | GetBeerByIdError;
 
 export type SearchBeerDispatchTypes =
   | SearchBeerNameLoading
