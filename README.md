@@ -1,6 +1,6 @@
 # Additional Implementations
 
-In addition to React.js, I used TypeScript and Redux in this project. These are the techs I'm trying to improve and I try to use them whenever possible :) Also I added a functionality for the search results, if you click the "Tell Me More" button, it scrolls up to the random beers card to show the search result in more detail. Hope you enjoy it!
+In addition to React.js, I used TypeScript and Redux in this project. These are the techs I'm trying to improve and I try to use them whenever possible :) Also I added a functionality for the search results, if you click the "Tell Me More" button, it scrolls up to the random beers card to show the search result in more detail. Don't forget to run `npm install` before running and I hope you enjoy it!
 
 # Getting Started with Create React App
 
